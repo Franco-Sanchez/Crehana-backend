@@ -50,9 +50,17 @@ class CourseType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     courses = graphene.List(CourseType)
+    levels = graphene.List(LevelType)
+    categories = graphene.List(CategoryType)
 
     def resolve_courses(self, info):
         return Course.objects.all()
+    
+    def resolve_levels(self, info):
+        return Level.objects.all()
+
+    def resolve_categories(self, info):
+        return Category.objects.all()
 
 class Mutation(graphene.ObjectType):
     create_category = CreateCategory.Field()
